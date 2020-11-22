@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot API CRUD</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--NOTED: laging maglalagay ng thymeleaf para maibasa nya kasi pag src di pwdi need Th mapa href/src!-->
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" th:href="@{custom/springicons.png}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/bootstrap/css/bootstrap.min.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <!--===============================================================================================-->
+        <!--    <link rel="stylesheet" type="text/css" th:href="@{vendor/animate/animate.css}">-->
+            <!--===============================================================================================-->
+        <!--    <link rel="stylesheet" type="text/css" th:href="@{vendor/select2/select2.min.css}">-->
+            <!--===============================================================================================-->
+
+    <link rel="stylesheet" type="text/css" th:href="@{vendor/perfect-scrollbar/perfect-scrollbar.css}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" th:href="@{css/util.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/main.css}">
+    <!--    REMEMBER PAG AJAX OR IBANG JAVASCRIPT DAPAT GGWA KA NG DIRECTORY BAGO KUNWARI-->
+    <!--    JS/AJAX/main.js dahil bawal ang JS/main.js pati sa css din -->
+    <!--    example sa CSS css/style.css dapat css/table/style.css-->
+
+    <!--===============================================================================================-->
+    <!--    PAG DI GUMAGANA AY LIPAT MO DUN SA CSS O SAN GUMAGANA NABBSA NYA TAPOS IBALIK MO DIN BUG SYA-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link type="text/css" href="css/style.css" rel="stylesheet" />
+
+
+
+
+</head>
+<body class="bodies" th:class="bodies">
+
+<!-- Sidebar -->
+<div class="wrapper d-flex align-items-md-stretch">
+    <nav id="sidebar" class="active">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+        </div>
+        <div class="p-4">
+            <h1><a href="index.html" class="logo">John Brix</a></h1>
+            <ul class="list-unstyled components mb-5">
+                <li class="active">
+            <!--                    class="fa fa-home mr-3"-->
+                    <a href="#add"><span><img src="assets/person.png"></span>Add Information</a>
+                </li>
+                <!--                <li>-->
+                <!--                    <a href="#"><span class="fa fa-user mr-3"></span>History</a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href="#"><span class="fa fa-briefcase mr-3"></span>Bugs</a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href="#"><span class="fa fa-sticky-note mr-3"></span>About</a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href="#"><span class="fa fa-paper-plane mr-3"></span> Settings</a>-->
+                <!--                </li>-->
+            </ul>
+
+            <div class="mb-5">
+            <!--                <h3 class="h6 mb-3">Subscribe for newsletter</h3>-->
+            <!--                <form action="#" class="subscribe-form">-->
+            <!--                    <div class="form-group d-flex">-->
+            <!--                        <div class="icon"><span class="icon-paper-plane"></span></div>-->
+            <!--                        <input type="text" class="form-control" placeholder="Enter Email Address">-->
+            <!--                    </div>-->
+            <!--                </form>-->
+            </div>
+
+            <div class="footer" id="footer">
+
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- Save Modal and Table -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <h2 class="mb-4">Add Information</h2>
+        <!-- table,modal and add information-->
+        <div class="limiter">
+                    <div class="table100 ver6 m-b-110">
+                        <table data-vertable="ver6">
+                            <thead>
+                            <tr class="row100 head">
+                                <th class="column100 column1" data-column="column1">ID</th>
+                                <th class="column100 column2" data-column="column2">First Name</th>
+                                <th class="column100 column3" data-column="column3">Last Name</th>
+                                <th class="column100 column4" data-column="column4">Age</th>
+                                <th class="column100 column5" data-column="column5">Update</th>
+                                <th class="column100 column6" data-column="column6">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div th:if="!${#lists.isEmpty(persons)}">
+                                <tr class="row100" th:each = "person : ${persons}">
+                                    <td class="column100 column1" th:text = "${person.id}"></td>
+                                    <td class="column100 column2" th:text = "${person.firstName}"></td>
+                                    <td class="column100 column3" th:text = "${person.lastName}"></td>
+                                    <td class="column100 column4" th:text = "${person.age}"></td>
+                                    <td  class="column100 column5" id="updateBut">
+                                      <!--  //pag id ksi uupdate
+                                      nya meaning di na nakukuha pag getId mali dahil iinsert lng sya
+                                      kaya nagkakaproblma si hibernate-->
+                                        <button id="updateSet" type="button"  th:attr="data-id=${person.id}" class="btn btn-default btn-view" data-toggle="modal" data-target="#myModal">update</button>
+                                    </td>
+                                    <td  class="column100 column6" id="deleteBut">
+<!--                                        <a th:href="${'/delete' + person.id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>-->
+                                        <button id="deleteSet" type="button"  th:attr="data-id=${person.id}" class="btn btn-default btn-view" data-toggle="modal" data-target="#myModal2">Delete</button>
+                                    </td>
+
+                                    <!--//end of statement of column of update-->
+                                </tr>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!--modal button-->
+                    <a id="modal-200910" href="#modal" role="button" class="btn btn-primary" data-toggle="modal">Add New Information</a>
+
+                    <div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="myModalLabel">
+                                        Add Information:
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <!--modal add save query-->
+                                <div class="modal-body">
+                                    <form id="form" action="/" method="post" th:object="${person}" th:action="@{/}" class="form" >
+
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input name="firstName"  class="form-control" type="text" id="firstName" placeholder="First Name" th:field="*{firstName}" >
+                                            <span  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstname Error</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input name="firstName" class="form-control" type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}" >
+                                            <span   th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastname Error</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="age">Age</label>
+                                            <input name="firstName" class="form-control" type="number" id="age" placeholder="age" th:field="*{age}">
+                                            <span   th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age Error</span>
+                                        </div>
+                                        <!--button-->
+                                        <div class="modal-footer">
+                                            <button id="save" type="submit" class="btn btn-primary">
+                                                Save
+                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--             <div class="align-text-top">-->
+<!--                                <a class="btn btn-primary" href="/add " role="button" >Add new Information</a>-->
+<!--                                </div>-->
+
+
+        </div>
+    </div>
+
+
+    </div>
+
+<!--//update modal-->
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!--<div class="modal fade" id="updateModal" th:id="updateModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel2">
+                    Update Information:
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <!--modal update save query-->
+            <div class="modal-body">
+                <form action="/update"  method="post" th:object="${person}" >
+
+                    <div class="form-group">
+                        <label for="inputId">ID</label>
+            <!--readonly is parang disbale pero nakaksend parin ng data sa server side-->
+                        <input  type="text" class="form-control" id="inputId" placeholder="ID" th:field="*{id}" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input name="firstName"  class="form-control" type="text" id="firstNameUpdate" placeholder="First Name" th:field="*{firstName}" >
+                        <span  th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstname Error</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input name="lastName" class="form-control" type="text" id="lastNameUpdate" placeholder="Last Name" th:field="*{lastName}" >
+                        <span   th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastname Error</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input name="age" class="form-control" type="number" id="ageUpdate" placeholder="age" th:field="*{age}" >
+                        <span   th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age Error</span>
+                    </div>
+                    <!--button-->
+                    <div class="modal-footer">
+                        <button id="updateButton" type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--//delete modal-->
+<div class="modal fade" id="myModal2" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel3">
+                    Do you want to Delete these information?
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <!--modal delete query-->
+            <div class="modal-body">
+                <form action="/delete"  method="post" th:object="${person}" >
+
+                    <div class="form-group">
+                        <label for="deleteId">ID</label>
+                    <!--readonly is parang disbale pero nakaksend parin ng data sa server side-->
+                        <input  type="text" class="form-control" id="deleteId" placeholder="ID" th:field="*{id}" readonly/>
+                    </div>
+                    <!--button-->
+                    <div class="modal-footer">
+                        <button id="deleteButton" type="submit" class="btn btn-primary">
+                            Delete
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+
+    <!-- for sidebar js-->
+<script src="js/ajax/jquery.min.js" type="29cedc06f97a0d647fb7a83c-text/javascript"></script>
+<script src="js/ajax/popper.js" type="29cedc06f97a0d647fb7a83c-text/javascript"></script>
+<script src="js/ajax/bootstrap.min.js" type="29cedc06f97a0d647fb7a83c-text/javascript"></script>
+<script src="js/ajax/main.js" type="29cedc06f97a0d647fb7a83c-text/javascript"></script>
+<script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="29cedc06f97a0d647fb7a83c-|49" defer=""></script>
+
+<!--    for validation add if null or not-->
+<script src="js/valueChecking.js"> </script>
+
+<!--      modal update passing value and AJAX js  -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<!--<script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{vendor/bootstrap/js/bootstrap.min.js}"></script>-->
+
+<script src="js/updateModal.js" >
+</script>
+
+
+<script src="js/deleteModal.js" >
+</script>
+
+
+<!--===============================================================================================-->
+<!--<script src="vendor/jquery/jquery-3.2.1.min.js" th:src="@{vendor/jquery/jquery-3.2.1.min.js}"></script>-->
+<!--&lt;!&ndash;===============================================================================================&ndash;&gt;-->
+<!--<script src="vendor/bootstrap/js/popper.js" th:src="@{vendor/bootstrap/js/popper.js}" ></script>-->
+
+<!--&lt;!&ndash;===============================================================================================&ndash;&gt;-->
+<!--<script src="vendor/select2/select2.min.js" th:src="@{vendor/select2/select2.min.js}"></script>-->
+<!--&lt;!&ndash;===============================================================================================&ndash;&gt;-->
+<!--<script src="js/main.js" th:src="@{js/main.js}"></script>-->
+
+</body>
+</html>
