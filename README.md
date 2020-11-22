@@ -14,7 +14,7 @@ I create a simple API CRUD with a Client Side.
 - Download the Project and Import to your IDE Eclipse or either your Intellij IDEA Ultimate
 - Config your Mysql go to Sql Folder and open your Xampp import the spring_boot_api_crud.sql
 - Sync your Maven and wait for downloading libraries.
-- Once its done you can open http://localhost:6969/ at your browser
+- Once its done you can open http://localhost:6969 at your browser
 
 <h1>Client Side with CRUD Spring Data JPA </h1>
 
