@@ -42,9 +42,16 @@ I create a simple API CRUD with a Client Side.
 - Go to terminal (Your IDE) type this mvnw clean package, once is done go to target folder you may see this spring-0.0.1-SNAPSHOT.jar along with orignal extension path.
 - Copy the absolute path of spring-0.0.1-SNAPSHOT.jar
 - Open CMD type java -jar "paste the absolute path here" (if cannot find then your Environment Variables JAVA_HOME must be in System Variables)
-- then enter you will see this
+- then enter you will see this.
 
 <img src="screenshot/6.png">
+
+<h1> How to find your IP to run the localhost in Spring boot </h1>
+
+- open cmd and type this ipconfig
+- look for your ipv4 address with your wirelass adapter (This is my modem so i use this)
+- open this in your browser http://192.168.1.0:6969 (192.168.1.0 is my modem Ipv4 Address its up to you what you gonna use it.)
+- you will see the client side.
 
 
 
