@@ -48,7 +48,7 @@ I create a simple API CRUD with a Client Side.
 
 <img src="screenshot/6.png">
 
-<h1> How to find your IP to run the localhost in Spring boot </h1>
+<h1> How to find your IP to run in the localhost</h1>
 
 - open cmd and type this ipconfig
 - look for your ipv4 address with your wirelass adapter (This is my modem so i use this)
