@@ -8,6 +8,7 @@ I create a simple API CRUD with a Client Side.
 - Eclipse Or Intellij IDEA Ultimate
 - Postman
 - Spring Data JPA
+- XAMPP
 
 <h1> How to Install </h1>
 
