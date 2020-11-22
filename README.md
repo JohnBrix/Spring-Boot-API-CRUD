@@ -4,6 +4,7 @@ I create a simple API CRUD with a Client Side.
 <h1>Requirements: </h1>
 
 - Mysql
+- Java
 - Spring Boot
 - Eclipse Or Intellij IDEA Ultimate
 - Postman
