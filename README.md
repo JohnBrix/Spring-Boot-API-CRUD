@@ -39,7 +39,7 @@ I create a simple API CRUD with a Client Side.
 
 <h1>If you want to use the API from different Platform and build as JAR Application.</h1>
 
-- Go to terminal type this mvnw clean package, once is done go to target folder you may see this spring-0.0.1-SNAPSHOT.jar along with orignal extension path
+- Go to terminal (Your IDE) type this mvnw clean package, once is done go to target folder you may see this spring-0.0.1-SNAPSHOT.jar along with orignal extension path.
 - Copy the absolute path of spring-0.0.1-SNAPSHOT.jar
 - Open CMD type java -jar "paste the absolute path here" (if cannot find then your Environment Variables JAVA_HOME must be in System Variables)
 - then enter you will see this
