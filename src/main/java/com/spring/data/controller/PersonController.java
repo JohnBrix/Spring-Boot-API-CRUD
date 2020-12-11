@@ -5,9 +5,7 @@ import com.spring.data.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,7 +20,8 @@ public class PersonController {
     }
 
 
-    @RequestMapping(value = {"/","/view"})
+
+    @GetMapping(value = {"/","/view"})
     public String getIndex(@ModelAttribute(name="person") Person person,Model model){
       List<Person> persons = personService.findAll();
       model.addAttribute("persons",persons); // to connecting html to java value in sql
@@ -31,31 +30,28 @@ public class PersonController {
     //modal
     //si POST naka hide data
     //si GET nakikita sa URL data
-    @RequestMapping(value = "/", method =RequestMethod.POST)
+//    postmapping mas maganda specific
+    @PostMapping("/")
     public String saveModal(@Valid Person person, BindingResult bindingResult, Model model){
-        
+
         System.out.println("/normal");
 
         this.personService.savePerson(person);
         return "redirect:/view";
     }
-
-    //pag walang model attribute di mo maggwa makuha yung setter and getter nito.
-    @RequestMapping(value = "/add")
-    public String getAdd(@ModelAttribute(name="person") Person person, Model model){
-
-        return "add";
-    }
-    @RequestMapping(value = "/add", method =RequestMethod.POST)
-    public String save(@Valid Person person, BindingResult bindingResult, Model model){
-        if (bindingResult.hasErrors()) {
-            System.out.println("true has errors");
-
-            return "add"; //para mapalabas laman ng validation
-        }
-
+    @PostMapping("/update{id}")
+    public String updatePerson(Person person) {
+        System.out.println("my id: "+person.getId());
         this.personService.savePerson(person);
         return "redirect:/view";
     }
+    @PostMapping("/delete{id}")
+    public String deletePerson(Person person){
+
+
+        this.personService.deletePerson(person);
+        return "redirect:/view";
+    }
+
     
 }
