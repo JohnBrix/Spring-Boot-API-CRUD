@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/api/persons")
 @CrossOrigin(origins= { "http://localhost:6969", }, maxAge=3000) //host
 public class PersonAPIController {
-    private final PersonService personService;
+   /* private final PersonService personService;
 
     public PersonAPIController(PersonService personService) {
         this.personService = personService;
@@ -69,5 +69,5 @@ public class PersonAPIController {
 
     }
 
-
+*/
 }

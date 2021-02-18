@@ -31,7 +31,7 @@ public class PersonController {
     //si POST naka hide data
     //si GET nakikita sa URL data
 //    postmapping mas maganda specific
-    @PostMapping("/")
+   /* @PostMapping("/")
     public String saveModal(@Valid Person person, BindingResult bindingResult, Model model){
 
         System.out.println("/normal");
@@ -51,7 +51,7 @@ public class PersonController {
 
         this.personService.deletePerson(person);
         return "redirect:/view";
-    }
+    }*/
 
     
 }
