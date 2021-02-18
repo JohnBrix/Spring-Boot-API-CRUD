@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class PersonController extends SpringBootServletInitializer {
+public class PersonController  {
 
     private final PersonService personService;
 

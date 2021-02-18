@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/login")
 @CrossOrigin(origins= { "http://localhost:6969", }, maxAge=3000) //host
-public class UserAPIController extends SpringBootServletInitializer {
+public class UserAPIController  {
 
     private final UserService userService;
     public UserAPIController(UserService userService) {
