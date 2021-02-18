@@ -7,6 +7,7 @@ import com.spring.data.exception.Message;
 import com.spring.data.exception.ResourceNotFoundException;
 import com.spring.data.service.PersonService;
 import com.spring.data.util.UriUtil;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -20,7 +21,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/persons")
 @CrossOrigin(origins= { "http://localhost:6969", }, maxAge=3000) //host
-public class PersonAPIController {
+public class PersonAPIController extends SpringBootServletInitializer {
     private final PersonService personService;
 
     public PersonAPIController(PersonService personService) {
