@@ -18,7 +18,7 @@ import java.util.List;
 @CrossOrigin(origins= { "http://localhost:6969", }, maxAge=3000) //host
 public class UserAPIController {
 
-  /*  private final UserService userService;
+    private final UserService userService;
     public UserAPIController(UserService userService) {
         this.userService = userService;
     }
@@ -36,5 +36,5 @@ public class UserAPIController {
                     return new UserNotFoundException(HttpStatus.UNAUTHORIZED, messages, UriUtil.path());
                 });
         //unauthorized meaning yung user di nag eexist or wala
-    }*/
+    }
 }
