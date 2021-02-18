@@ -21,7 +21,7 @@ public class PersonController {
 
 
 
-    @GetMapping(value = {"/","/view"})
+    @RequestMapping(value = {"/","/view"})
     public String getIndex(@ModelAttribute(name="person") Person person,Model model){
       List<Person> persons = personService.findAll();
       model.addAttribute("persons",persons); // to connecting html to java value in sql
